@@ -740,6 +740,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+body #main-content {
+  margin-top: -100px;
+  padding-top: 100px;
+}
 body::before {
   content: "";
   position: absolute;
@@ -1777,45 +1781,45 @@ body.no-js header nav#main-navigation ul#main-navigation-content li:not(#logo) a
 
 @keyframes glowing {
   0%, 100% {
-    left: 39%;
-    top: 59%;
-    opacity: 0.4;
+    left: 1%;
+    top: 46%;
+    opacity: 0.3;
   }
   25% {
-    left: 48%;
-    top: 17%;
-    opacity: 0.2;
+    left: 88%;
+    top: 47%;
+    opacity: 0.4;
   }
   50% {
-    left: 59%;
-    top: 16%;
-    opacity: 0.4;
+    left: 9%;
+    top: 45%;
+    opacity: 0.2;
   }
   75% {
-    left: 54%;
-    top: 29%;
-    opacity: 0.4;
+    left: 31%;
+    top: 41%;
+    opacity: 0.2;
   }
 }
 @keyframes glowing-alt {
   0%, 100% {
-    left: 59%;
-    top: 80%;
-    opacity: 0.2;
-  }
-  25% {
-    left: 83%;
-    top: 13%;
+    left: 14%;
+    top: 41%;
     opacity: 0.4;
   }
+  25% {
+    left: 50%;
+    top: 96%;
+    opacity: 0.2;
+  }
   50% {
-    left: 96%;
-    top: 44%;
-    opacity: 0.3;
+    left: 52%;
+    top: 74%;
+    opacity: 0.2;
   }
   75% {
-    left: 31%;
-    top: 74%;
+    left: 64%;
+    top: 36%;
     opacity: 0.4;
   }
 }
