@@ -1,0 +1,1094 @@
+/***Start vom Stylesheet***/
+$primary: #016ab3
+$secondary: #1f2045
+$invert-secondary: invert($secondary)
+
+$color-success: #11c911
+$color-danger: #c91111
+$color-warning: #c9c911
+$body-color: darken($secondary, 10%)
+
+$headline-color: if(lightness($body-color) >= 50, $secondary, $primary)
+$text-color: if(lightness($body-color) >= 50, #333, #fff)
+
+$headline-font: "Tahoma", sans-serif
+$text-font: "Verdana", sans-serif
+
+$header-bg: darken($secondary, 5%)
+$global-radius: 1rem
+$link-color: if(lightness($body-color) >= 50, $secondary, $primary)
+$header-height: 100px
+$content-width: 1400px
+$mmenue: 150px
+
+$experiences-project: 10rem
+
+$breakpoints: ("576px": "", "768px": "sm", "992px": "md", "1200px": "xl", "1400px": "xxl")
+$flex-gap: 2rem
+$max-col: 12 
+
+@each $breakpoint-val, $br-index in $breakpoints 
+    @media screen and (min-width: #{$breakpoint-val})
+        .col#{if($br-index != '', '-#{$br-index}', '')}
+            @for $col-nr from 1 through $max-col
+                &-#{$col-nr}
+                    width: calc(100% / $max-col * $col-nr )
+                    padding-left: calc($flex-gap / 2)
+                    padding-right: calc($flex-gap / 2)
+                    box-sizing: border-box
+        .flex-col#{if($br-index != '', '-#{$br-index}', '')}
+            @for $col-nr from 1 through $max-col
+                &-#{$col-nr}
+                    width: calc((100% - ($max-col / $col-nr - 1) * $flex-gap) / $max-col * $col-nr)
+                    box-sizing: border-box
+
+/*Animation*/
+    
+@keyframes plop
+    0% 
+        transform: scale(0,0)
+        opacity: 0
+    50% 
+        transform: scale(.75,.25)
+        opacity: 1
+    100% 
+        transform: scale(1,1)
+
+@keyframes hero-slide
+    0% 
+        transform: translate(-100%, 0)
+    100% 
+        transform: translate(0, 0)
+
+@keyframes header-visible
+    0% 
+        transform: translate(0, -100%)
+        opacity: 0
+        margin-top: 0
+    100% 
+        opacity: 1
+        transform: translate(0, 0)
+        margin-top: 1rem
+
+@keyframes hero-arrow-wobble
+    0%, 100%
+        margin-top: 0
+    50%
+        margin-top: .5rem
+
+/*Allgemeines Styling*/
+
+html 
+  scroll-behavior: smooth
+
+*
+    box-sizing: border-box
+    &:focus-visible
+        outline-offset: 3px
+        outline-width: 5px
+        box-shadow: 0 0 20px 0 rgba(#000, .8)
+
+@for $h from 2 through 6
+    h#{$h}, .h#{$h}
+        color: $headline-color
+        font-family: $headline-font
+        font-size: clamp(#{'calc(2.5rem - (' + $h + rem' * 0.25))'},#{'calc(6vw - (' + $h + vw' * 0.5))'},#{'calc(3rem - (' + $h + rem' * 0.3))'})
+        font-weight: calc(900 - (#{$h} - 1) * 200 + 300)
+
+h1
+    font-family: $headline-font
+    color: $headline-color
+
+$headline-min: 2.5rem    
+$headline-current: 8vw
+$headline-max: 10rem
+$headline: clamp($headline-min, $headline-current, $headline-max)
+$headline-button: clamp($headline-min, $headline-current, $headline-max)
+$sub-headline: clamp(#{calc($headline-min *.5)}, #{calc($headline-current *.5)}, #{calc($headline-max *.5)})
+
+.headline
+    font-family: $headline-font
+    font-size: $headline
+    font-weight: 900
+    text-transform: uppercase
+    letter-spacing: .5rem
+    display: inline-block
+    line-height: $headline
+    margin: 0
+    padding: 0
+    color: $headline-color
+
+span, a, p, button, ul, li
+    font-family: $text-font
+    font-size: 1.2rem
+    line-height: 1.3
+    letter-spacing: .5px
+    color: $text-color
+
+a
+    color: $link-color
+
+/*Styling*/
+
+body
+    margin: 0
+    padding: 0px
+    overflow-x: hidden
+    background-color: $body-color
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    &::before
+        content:""
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        z-index: 9998
+        background: transparent
+        pointer-events: none
+        transition: all .2s ease-in-out
+    &.content-hidden
+        &:not(.no-js)
+            &::before
+                background: $body-color
+                transition: all .2s ease-in-out
+            > *
+                &:not(:nth-child(1))
+                    opacity: 0
+                    visibility: hidden
+    #anim-stop
+        position: fixed
+        bottom: 1rem
+        right: 1rem
+        z-index: 100
+        border-radius: 500px
+        overflow: hidden
+        display: flex
+        justify-content: center
+        align-items: center
+        pointer-events: all
+        cursor: pointer
+        padding: .2rem
+        border: none
+        background-color: if(lightness($body-color) > 50, darken($body-color, 10%), lighten($body-color, 10%))
+        @media screen and (min-width: nth(map-keys($breakpoints), 3))
+            bottom: 4rem
+        @media screen and (min-width: nth(map-keys($breakpoints), 4))
+            bottom: 1rem
+        &.on
+            box-shadow: 0 0 20px 0 $color-danger
+        > img
+            height: 3rem
+            filter: if(lightness(if(lightness($body-color) > 50, darken($body-color, 30%), lighten($body-color, 30%)))>50, invert(0), invert(1))
+        > span
+            display: none
+            @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                padding: 0 1rem
+                display: block
+                flex-basis: 0
+    ul#fast-navigation
+        margin: 0
+        padding: 0  
+        position: relative
+        list-style: none
+        > li
+            position: absolute
+            top: 1rem
+            left: 1rem
+            transform: scale(0,0)
+            opacity: 0
+            z-index: 100
+            > a
+                background-color: rgba(#fff, .7)
+                backdrop-filter: blur(10px)
+                box-shadow: 0 0 10px 0 rgba(#000, .1)
+                padding: 1rem
+                border-radius: $global-radius
+                display: block
+            &:hover, &:focus-within
+                opacity: 1
+                transform: scale(1,1)     
+    header
+        margin: 0
+        padding: 0
+        overflow-x: hidden
+        nav#main-navigation
+            position: fixed
+            top: 0
+            left: 0
+            z-index: 99
+            height: $header-height
+            width: 100%
+            display: block
+            text-align: center
+            background-color: $header-bg
+            margin-top: 0
+            ul#main-navigation-content
+                padding: 0 10px
+                @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                    padding: 0 calc($header-height / 2)
+                position: relative
+                list-style: none
+                margin: 0 auto
+                display: flex
+                flex-direction: row
+                align-items: stretch
+                max-width: $content-width
+                height: 100%
+                flex-wrap: wrap
+                > li
+                    display: flex
+                    height: 100%
+                    z-index: 1
+                    &#logo
+                        position: relative
+                li
+                    &:not(#logo)
+                        .menu-toggle 
+                            display: none
+                            + .menu-label-off
+                                display: flex
+                                + .menu-label-on
+                                    display: none
+                                    + ul
+                                        transform: translateX(-100%)
+                                        list-style: none
+                                        position: fixed
+                                        top: 0
+                                        left: 0
+                                        width: 100vw
+                                        height: 100vh
+                                        max-width: calc(100vw - $mmenue)
+                                        display: flex
+                                        flex-direction: column
+                                        padding: 0
+                                        z-index: 1
+                                        &::before
+                                            content:""
+                                            position: absolute
+                                            z-index: -1
+                                            top: -1rem
+                                            bottom: -1rem
+                                            left: 0
+                                            right: 0
+                                            background-color: rgba(darken($header-bg, 10%), .8)
+                                            backdrop-filter: blur(5px)
+                                            display: block
+                                        padding-top: 3rem
+                                        padding-bottom: 3rem
+                                        padding-left: 2rem
+                                        padding-right: 2rem
+                                        gap: .5rem
+                                        align-items: flex-start
+                                        a
+                                            color: if(lightness($body-color) >= 50, $secondary, #fff)
+                                            text-decoration: underline
+                                            font-size: 1rem
+                                            &:hover, &:focus-within
+                                                background-color: rgba(darken($header-bg, 50%), .1)
+                                        @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                            &::before
+                                                display: none
+                                            position: relative
+                                            padding: 0
+                                            background: transparent
+                                            transform: translate(0)
+                                            flex-direction: row
+                                            top: unset
+                                            left: unset
+                                            width: auto
+                                            height: unset
+                                            gap: 0
+                                            margin: 0
+                                            backdrop-filter: blur(0)
+                                            max-width: unset
+                                            align-items: center
+                                            > li
+                                                height: 100%
+                                
+                            &:checked
+                                + .menu-label-off
+                                    display: none
+                                    + .menu-label-on
+                                        display: flex
+                                        + ul
+                                            transform: translateX(0%)
+
+
+                        .menu-label-on, .menu-label-off
+                            justify-content: center
+                            align-items: center
+                            cursor: pointer
+                            padding: 1rem
+                            color: if(lightness($body-color)>=50, $secondary, #fff)
+                            width: $mmenue
+                        
+                        @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                            display: flex
+                            flex-direction: row
+                            .menu-label-off, #menu-toggle, .menu-label-on
+                                display: none!important
+                            > ul
+                                margin: 0
+                                padding: 0
+                                list-style: none
+                                display: flex
+                                flex-direction: row
+                                a
+                                    display: flex
+                                    justify-content: center
+                                    align-items: center
+                                    padding: 1rem
+                                    color: if(lightness($body-color) >= 50, $secondary, #fff)
+                                    text-decoration: none
+                                    &:hover, &:focus-within
+                                        background-color: rgba(darken($header-bg, 50%), .1)
+                                    &:focus-within
+                                        text-decoration: underline
+                    &#logo
+                        aspect-ratio: 1
+                        margin-right: auto
+                        > a
+                            position: absolute
+                            top: 0
+                            left: 0
+                            right: 0
+                            bottom: 0
+                            &:hover, &:focus-within
+                                background-color: rgba(darken($header-bg, 50%), .1) 
+                            img
+                                filter: invert(1) grayscale(1) brightness(2)
+    main
+        article
+            display: flex
+            align-items: center
+            flex-direction: column
+            justify-content: center
+            section
+                max-width: $content-width
+                padding: 6rem 0
+                width: 100%
+                &.hero
+                    padding: 0
+                    width: 100%
+                    height: calc(100vh - $headline * 2)
+                    @media screen and (min-width: nth(map-keys($breakpoints), 1))
+                        height: calc(100vh - $headline)
+                    max-width: unset
+                    >[class*="hero-"]
+                        overflow: hidden
+                        position: relative
+                        width: 100%
+                        height: 100%
+                        display: flex
+                        flex-direction: column-reverse
+                        >.hero-img
+                            position: relative
+                            width: 100%
+                            height: 100%
+                            overflow: hidden
+                            >.foreground
+                                position: absolute
+                                bottom: 0
+                                left: 0
+                                z-index: 2
+                                height: calc(100% - $header-height)  
+                            >.midground
+                                position: absolute
+                                bottom: 0
+                                left: 0
+                                z-index: 1
+                                height: calc(100% - $header-height)
+                            >.background
+                                opacity: .2
+                                position: absolute
+                                top: 0
+                                left: 0
+                                right: 0
+                                bottom: 0
+                                background-image: url(../img/Hero-Bg.jpg)
+                                background-position: left center
+                                background-size: cover
+                                z-index: 0
+                &#about-me
+                    padding: 0
+                    padding-top: $header-height
+                    margin-top: -$header-height
+                    max-width: 100vw
+                    position: relative
+                    &:before
+                        position: absolute
+                        content:""
+                        top: 5rem
+                        left: 40%
+                        display: block
+                        width: 50%
+                        height: 50%
+                        background-color: mix($body-color, $primary, 98%)
+                        z-index: -1
+                    &:after
+                        position: absolute
+                        content:""
+                        top: 3rem
+                        display: block
+                        width: 50%
+                        height: 90%
+                        right: 35%
+                        background-color: mix($body-color, $primary, 93%)
+                        z-index: -1
+                    > .headline-content-wrapper
+                        .headline-content
+                            color: $secondary
+                            display: flex
+                            position: relative
+                            align-items: flex-start
+                            padding: 0 clamp(1rem, 5vw, 3rem)
+                            flex-direction: column
+                            @media screen and (min-width: nth(map-keys($breakpoints), 4))
+                                flex-direction: row
+                                align-items: center
+                            gap: 1rem
+                            .headline-button
+                                padding: 1.5rem
+                                border: solid 5px $secondary
+                                display: none
+                                @media screen and (min-width: nth(map-keys($breakpoints), 4))
+                                    padding: 0
+                                    border: solid 15px $secondary
+                                    display: block
+                                width: $headline-button
+                                font-size: $headline-button
+                                height: auto
+                                aspect-ratio: 1
+                                position: relative
+                                border-radius: 100%
+                                > span
+                                    top: 50%
+                                    left: 50%
+                                    font-size: $headline-button
+                                    transform: translate(-50%, -50%) scale(.5)
+                                    position: absolute
+                                &:focus
+                                    text-decoration: underline
+                    h1
+                        text-transform: uppercase
+                        font-size: $sub-headline
+                        margin: 0
+                        padding: 0 clamp(1rem, 5vw, 3rem)
+                        letter-spacing: .5rem
+                    p   
+                        &.intro-text
+                            margin: 0
+                            padding: 2rem
+                            font-size: 1.1rem
+                            position: relative
+                            @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                font-size: 2rem
+                            @media screen and (min-width: nth(map-keys($breakpoints), 4))
+                                column-count: 2
+                                padding: 5rem 200px 5rem clamp(1rem, 5vw, 3rem)
+                                font-size: 2rem
+                        a
+                            font-size: 1.1rem
+                            @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                font-size: 2rem
+            &#experience
+                margin-top: -$header-height
+                align-items: stretch
+                justify-content: flex-start
+                flex-direction: column
+                flex-wrap: wrap
+                gap: $flex-gap
+                max-width: ($content-width + 200px)
+                padding: 2rem 1rem
+                padding-top: calc($header-height + 2rem)
+                margin-left: 0
+                box-sizing: border-box
+                @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                    flex-direction: row
+                > section
+                    display: flex
+                    padding: 0
+                    justify-content: stretch
+                    align-items: stretch
+                    flex-grow: 1
+                    position: relative
+                    box-sizing: border-box
+                    flex-direction: column
+                    &:nth-last-child(1)
+                        margin-bottom: 3rem
+                    @media screen and (min-width: nth(map-keys($breakpoints), 1))
+                        &:nth-last-child(1)
+                            margin-bottom: 0
+                    @media screen and (min-width: nth(map-keys($breakpoints), 5))
+                        flex-direction: row
+                        padding: 2rem
+                    &::before
+                        z-index: -1
+                        background-color: if(lightness($body-color) >= 50, mix($primary, $body-color, 5%), mix($secondary, $body-color, 5%))
+                        content:""
+                        position: absolute
+                        top: 0
+                        left: 0
+                        right: 0
+                        bottom: 0
+                    .img-container-3d
+                        position: relative
+                        height: 100%
+                        min-width: 100%
+                        @media screen and (min-width: nth(map-keys($breakpoints), 5))
+                            margin-bottom: unset
+                            min-width: 300px
+                            max-width: 300px
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-items: center
+                        padding: 2rem 1rem
+                        z-index: 1
+                        max-height: 300px
+                        min-height: 300px
+                        @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                            min-height: 400px
+                            max-height: unset
+                        box-sizing: border-box
+                        .img-container-caption
+                            font-size: 2rem
+                            padding: 0
+                            margin: .5rem 0
+                            transform: scale(1.2)
+                            color: if(lightness($body-color) >= 50, $secondary, #fff)
+                        .img-container-subcaption
+                            overflow: hidden
+                            position: relative
+                            text-align: center
+                            > *
+                                display: block
+                                margin-bottom: 0
+                                color: if(lightness($body-color) >= 50, $secondary, #fff)
+                        > .img-container-background
+                            position: absolute
+                            top: 0
+                            left: 0
+                            width: 100%
+                            height: 100%
+                            display: block
+                            z-index: -1
+                            transform: perspective(1000px) translateY(-5%) rotateX(20deg) translateZ(0) scale(.8)
+                            background-color: if(lightness($body-color) >= 50, mix($primary, $body-color, 10%), mix($secondary, $body-color, 10%))
+                            overflow: hidden
+                            border-radius: $global-radius
+                            @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                                transform: perspective(1000px) translateY(-5%) rotateX(20deg) translateZ(0)
+                                border-radius: 0
+                            &:before
+                                content:""
+                                position: absolute
+                                top: 0
+                                left: 0
+                                right: 0
+                                bottom: 0
+                                background: linear-gradient(180deg, rgba(darken(if(lightness($body-color) >= 50, mix($primary, $body-color, 10%), mix($secondary, $body-color, 10%)), 10%), 1) 0%, rgba(darken(if(lightness($body-color) >= 50, mix($primary, $body-color, 10%), mix($secondary, $body-color, 10%)), 20%), 0.2) 50%)
+                                @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                    background: linear-gradient(180deg, rgba(darken(if(lightness($body-color) >= 50, mix($primary, $body-color, 10%), mix($secondary, $body-color, 10%)), 10%), 1) 0%, rgba(darken(if(lightness($body-color) >= 50, mix($primary, $body-color, 10%), mix($secondary, $body-color, 10%)), 20%), 0) 50%)
+                        > img
+                            height: 100px
+                            width: auto
+                            aspect-ratio: 1
+                            margin-bottom: 2rem
+                            margin-top: -4rem
+                            filter: invert(1) drop-shadow(10px 0 0px rgba(#000, 1))
+                    .experience-content
+                        padding: 0 2rem
+                        @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                            padding: 2rem
+                        > h3
+                            padding: 0
+                            margin: 0
+                        display: flex
+                        flex-direction: column
+                        > *
+                            color: if(lightness($body-color) >= 50, $secondary, #fff)
+                        > p
+                            &:nth-child(2)
+                                margin-bottom: auto
+                        .experience-projects
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            gap: 1rem
+                            > a
+                                display: block
+                                flex: 1 1 auto
+                                height: $experiences-project
+                                width: auto
+                                background: red
+                                margin-bottom: (-$experiences-project + 3rem)
+            &#cv
+                background: linear-gradient(180deg, darken($body-color, 5%) 0%, $body-color 100%)
+                > section
+                    max-width: $content-width
+                    padding: 3rem 0
+                    @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                        padding: 6rem 0 3rem
+                    > h3
+                        background-color: lighten($body-color, 5%)
+                        width: max-content
+                        padding: 1rem 2rem
+                    > h2, > p
+                        padding: 0 2rem
+                        @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                            padding: 0
+                    > div
+                        display: flex
+                        align-items: stretch
+                        flex-direction: column
+                        @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                            flex-direction: row
+                            margin-bottom: 6rem
+                        flex-wrap: wrap
+                        gap: $flex-gap
+                        > section
+                            background-color: lighten($body-color, 5%)
+                            padding: 5rem 2rem
+                            @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                                padding: 5rem
+                            &.projekt-container
+                                position: relative
+                                min-height: 500px
+                                z-index: 1
+                                > a
+                                    &.projekt-img-container
+                                        &::before
+                                            content:""
+                                            position: absolute
+                                            top: 0
+                                            left: 0
+                                            right: 0
+                                            bottom: 0
+                                            background: linear-gradient(180deg, rgba($body-color, .3) 0%, rgba($body-color, 0) 100%)
+                                            z-index: 1
+                                            transition: all .3s ease-in-out
+                                        display: block
+                                        position: absolute
+                                        top: 0
+                                        left: 0
+                                        right: 0
+                                        bottom: 0
+                                        width: 100%
+                                        overflow: hidden
+                                        height: auto
+                                        z-index: -1
+                                        &:hover, &:focus
+                                            &::before
+                                                transform: translateY(-100%)
+                                            > img
+                                                transform: translate(-50%, -50%) scale(1.2) rotate(5deg) 
+                                                max-width: 100%
+                                                border-radius: $global-radius
+                                        > img
+                                            position: absolute
+                                            left: 50%
+                                            top: 50%
+                                            transform: translate(-50%, -50%)
+                                            max-width: 150%
+                                            transition: all .3s ease-in-out
+
+                            > h3
+                                margin: 0
+                            > h4
+                                margin-top: .5rem
+                                font-weight: 100
+                                margin-bottom: 2rem
+                            > h3, > h4
+                                color: if(lightness(lighten($body-color, 5%)) >= 50, $primary, #fff)
+                                @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                    text-align: center
+                            > ul
+                                margin: 0
+                                padding: 0
+                                list-style: none
+                                @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                    list-style: disc
+                                > li
+                                    margin-bottom: .5rem
+                                    @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                                        margin-left: 2rem
+                                        margin-bottom: 0
+                                    b, strong, &::marker
+                                        color: if(lightness(lighten($body-color, 5%))>=50, $secondary, $primary)
+                                        font-size: 1.5rem
+            &#contact
+                padding: 0 0 3rem
+                margin-left: 1rem
+                margin-right: 1rem
+                .contact
+                    text-align: center
+                    color: if(lightness($body-color) >=50, $secondary, #fff)
+                    padding: 2rem
+                    border-radius: $global-radius
+                    background-color: darken($body-color, 5%)
+                    > a
+                        color: $primary
+    footer
+        width: 100%
+        margin-top: auto
+        > section
+            > ul
+                display: flex
+                flex-direction: column
+                list-style: none
+                margin: 0
+                padding: 2rem 0
+                justify-content: center
+                align-items: center
+                @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                    flex-direction: row
+                gap: 2rem
+                > li
+                    a
+                        color: if(lightness($body-color)>=50, $secondary, #fff)
+                        text-decoration: none
+                        transition: all .3s ease-in-out
+                        &:focus
+                            text-decoration: underline
+                        &:hover, &:focus
+                            color: if(lightness($body-color)>=50, $secondary, #fff)
+    &:not(.anim-deactivated)
+        a
+            transition: all .2s ease-in-out
+        ul#fast-navigation
+            > li
+                &:hover, &:focus-within
+                    animation: plop .1s ease-in-out forwards
+                > a
+                    background-color: rgba($header-bg, .7)
+                    color: #fff
+        header
+            nav#main-navigation
+                transition: all .5s
+                animation: header-visible .3s ease-in-out .3s
+                margin-top: 1rem 
+                background-color: transparent
+                ul#main-navigation-content
+                    @media screen and (min-width: nth(map-keys($breakpoints), 2))
+                        &:before
+                            content: ""
+                            display: block
+                            position: absolute
+                            width: 100%
+                            height: 100%
+                            z-index: 0
+                            backdrop-filter: blur(10px)
+                            box-shadow: inset 0 0 60px rgba($body-color, .52)
+                            top: 0
+                            left: 0
+                            pointer-events: none
+                            animation: plop .1s ease-in-out .3s forwards
+                            background-color: rgba($body-color, .7)
+                            border-radius: 200px
+                            transition: all .2s ease-in-out
+                    li
+                        &:not(#logo)
+                            .menu-label-on, .menu-label-off
+                                transition: all .2s ease-in-out
+                            .menu-toggle 
+                                + .menu-label-off
+                                    + .menu-label-on
+                                        + ul
+                                            top: 0
+                                            transition: all .2s
+                                            a
+                                                transition: all .2s
+                                                color: if(lightness($body-color) >= 50, $secondary, #fff)
+                                                font-weight: 900
+                                &:checked
+                                    + .menu-label-off
+                                        + .menu-label-on
+                                            + ul
+                                                transform: translateX(0%)
+
+                        &#logo
+                            > a
+                                transition: all .2s
+                                img
+                                    transition: all .2s
+                                    filter: if(lightness($body-color) >= 50,invert(0), invert(1) grayscale(1) brightness(2))
+                &.scrolled
+                    margin-top: 0
+                    background-color: $header-bg
+                    ul#main-navigation-content
+                        &:before
+                            transition: all .2s ease-in-out
+                            opacity: 0
+                        >li
+                            &:not(#logo)
+                                .menu-label-on, .menu-label-off
+                                    color: if(lightness($header-bg)>=50, $primary, #fff)
+                                .menu-toggle 
+                                    &:checked
+                                        + .menu-label-off
+                                            + .menu-label-on
+                                                + ul
+                                                    top: 0
+                                a
+                                    color: #fff
+                            &#logo
+                                > a
+                                    img
+                                        filter: invert(1) grayscale(1) brightness(2)
+        main
+            article
+                section
+                    &.hero
+                        >[class*="hero-"]
+                            >.hero-img
+                                >.foreground
+                                    transform: translate(-100%, 0)
+                                    animation: hero-slide .7s ease-in-out .2s forwards   
+                                >.midground
+                                    transform: translate(-100%, 0)
+                                    animation: hero-slide .7s ease-in-out forwards
+                    &#about-me
+                        width: 100%
+                        a
+                            transition: all .2s ease-in-out
+                        &:before
+                            animation: plop .2s ease-in-out both
+                            animation-play-state: paused
+                        &:after
+                            animation: plop .3s ease-in-out both
+                            animation-play-state: paused
+                        &.global-scroll.visible
+                            &:before
+                                animation-play-state: running
+                            &:after
+                                animation-play-state: running
+                        > .headline-content-wrapper
+                            .headline-content
+                                padding: 0
+                                &.scroll-effect.visible
+                                    transition: all .4s ease-in-out
+                                    padding: 0 clamp(1rem, 5vw, 3rem)
+                                    @media screen and (min-width: nth(map-keys($breakpoints), 1))
+                                        padding: 0 0 0 clamp(1rem, 5vw, 3rem)
+                                .headline-button
+                                    > span
+                                        &:nth-last-child(1)
+                                            animation: hero-arrow-wobble 2s ease-in-out infinite both
+                                    &:focus, &:hover
+                                        > span
+                                            &:nth-last-child(1)
+                                                animation-play-state: paused
+                        h1
+                            padding: 0
+                            &.scroll-effect.visible
+                                transition: all .4s ease-in-out
+                                padding: 0 clamp(1rem, 5vw, 3rem)
+                        .intro
+                            overflow: hidden
+                            p
+                                overflow: hidden
+                                transform: translateY(-100%)
+                                margin: 0
+                                transition: all .5s ease-in-out
+                            &.global-scroll.visible
+                                p
+                                    transform: translateY(0%)
+                &#experience
+                    @media screen and (min-width: nth(map-keys($breakpoints), 3))
+                        > section
+                            transition: all .2s ease-in-out
+                            .img-container-3d
+                                > .img-container-background
+                                    position: absolute
+                                    background-color: if(lightness($body-color) >= 50, mix($primary, $body-color, 5%), mix($secondary, $body-color, 5%))
+                                    top: 0
+                                    left: 0
+                                    width: 100%
+                                    height: 100%
+                                    display: block
+                                    z-index: -1
+                                    transform: perspective(1000px)
+                                    transition: all .2s ease-in-out
+                                    &:before
+                                        opacity: 0
+                                        transition: all .4s ease-in-out
+                                > img
+                                    height: auto
+                                    width: 100px
+                                    aspect-ratio: 1
+                                    margin-bottom: 2rem
+                                    transition: all .2s ease-in-out
+                                    filter: if(lightness($body-color) >= 50, invert(0), invert(1))
+                                .img-container-caption
+                                    transition: all .2s ease-in-out
+                                    padding: 0
+                                    margin: .5rem 0
+                                    transform: scale(1)
+                                    color: if(lightness($body-color) >= 50, $secondary, #fff)
+                                .img-container-subcaption
+                                    overflow: hidden
+                                    position: relative
+                                    > *
+                                        display: block
+                                        margin-bottom: -3rem
+                                        color: if(lightness($body-color) >= 50, $secondary, #fff)
+                                        transition: all .2s ease-in-out
+                            .experience-projects
+                                > a
+                                    transition: all .2s ease-in-out
+                            &:hover, &:focus, &:focus-within
+                                .img-container-3d
+                                    > img
+                                        margin-bottom: 2rem
+                                        margin-top: -4rem
+                                        transition: all .2s ease-in-out .2s
+                                        filter: invert(1) drop-shadow(10px 0 0px rgba(#000, 1))
+                                    .img-container-caption
+                                        transition: all .2s ease-in-out .2s
+                                        transform: scale(1.2)
+                                    .img-container-subcaption
+                                        overflow: hidden
+                                        position: relative
+                                        > *
+                                            display: block
+                                            margin-bottom: 0
+                                            transition: all .2s ease-in-out .2s
+                                            color: if(lightness($body-color) >= 50, $secondary, #fff)
+                                    .img-container-background
+                                        transform: perspective(1000px) translateY(-5%) rotateX(20deg) translateZ(0) scale(.9)
+                                        transition: all .2s ease-in-out
+                                        background-color: if(lightness($body-color) >= 50, mix($primary, $body-color, 10%), mix($secondary, $body-color, 10%))
+                                        &:before
+                                            opacity: 1
+                                            transition: all .4s ease-in-out
+                &#contact
+                    .contact
+                        > a
+                            transition: all .2s ease-in-out
+    &.no-js, &:not([data-path*="index.html"])
+        header
+            nav#main-navigation
+                margin: 0
+                background-color: $header-bg
+                ul#main-navigation-content
+                    &::before
+                        display: none
+                    li
+                        &#logo
+                            > a
+                                img
+                                    filter: invert(1) grayscale(1) brightness(2)
+                        &:not(#logo)
+                            a
+                                color: #fff
+
+.visually-hidden 
+    position: absolute !important
+    height: 1px
+    width: 1px
+    overflow: hidden
+    clip: rect(1px, 1px, 1px, 1px)
+    white-space: nowrap
+
+@keyframes glowing
+    0%, 100%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+    25%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+    50%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+    75%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+
+@keyframes glowing-alt
+    0%, 100%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+    25%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+    50%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+    75%
+        left: calc(random(100) * 1%)
+        top: calc(random(100) * 1%)
+        opacity: calc((random(3) + 1) * 0.1)
+
+
+#anim-toggle-modal
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background: $body-color
+    display: none
+    align-items: center
+    justify-content: center
+    z-index: 9999
+    &:before, &::after
+        content:""
+        position: absolute
+        height: auto
+        background: radial-gradient(closest-side, $secondary 0%, rgba($secondary, 0) 100%)
+        aspect-ratio: 1
+        opacity: 0
+        transform: translate(-50%, -50%)
+        filter: blur(1000px)
+        z-index: -1
+    &::before
+        width: 140vw
+        animation: glowing 60s ease-in-out infinite both
+        background: radial-gradient(closest-side, $secondary 0%, rgba($secondary, 0) 100%)
+    &::after
+        width: 100vw
+        animation: glowing-alt 60s ease-in-out infinite both
+        background: radial-gradient(closest-side, lighten($secondary, 10%) 0%, rgba(lighten($secondary, 10%), 0) 100%)
+        
+    #anim-toggle-modal-content
+        padding: 2rem
+        text-align: center
+
+        .h2
+            font-family: $headline-font
+            font-size: clamp(3rem, 10vw, 10rem)
+            color: $headline-color
+            margin-bottom: 1rem
+
+        p
+            font-family: $text-font
+            font-size: 1.2rem
+            color: $text-color
+            margin-bottom: 1.5rem
+
+        button
+            font-family: $text-font
+            font-size: 1rem
+            padding: 0.8rem 1.5rem
+            margin: 0.5rem
+            font-weight: 900
+            background-color: if(lightness($body-color) >= 50, $secondary, #fff)
+            color: if(lightness(if(lightness($body-color) >= 50, $secondary, #fff)) >= 50, $secondary, #fff)
+            border: none
+            border-radius: $global-radius
+            cursor: pointer
+            transition: background-color 0.3s ease-in-out
+
+            &:hover, &:focus
+                background-color: darken(if(lightness($body-color) >= 50, $secondary, #fff), 20%)

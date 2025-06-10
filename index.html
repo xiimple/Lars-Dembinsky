@@ -1,5 +1,276 @@
-<html>
+<!doctype html>
+<html lang="de" class="anim-deactivated">
   <head>
-    <title>Teast</title>
+    <title>Webdesigner und -Entwickler – Portfolio von Lars Dembinsky</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <script src="js/anim-init.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>document.body.classList.remove("no-js");</script>
   </head>
+  <body class="no-js content-hidden">
+    <aside>
+      <ul id="fast-navigation">
+        <li><a href="#main-content" role="button" title="Hier geht es zum Inhalt der Seite">Hier geht es zum Inhalt der Seite</a></li>
+        <li><a href="#contact" role="button" title="Direkt zum kontakt aufnehmen springen">Direkt zum Kontakt aufnehmen springen</a></li>
+      </ul>
+      <button id="anim-stop" class="on" title="Klicken um die Animation zu stoppen auf der Webseite">
+        <div id="status-message" aria-live="polite" class="visually-hidden"></div>
+      </button>
+    </aside>
+    <header id="header-navigation">
+      <nav id="main-navigation">    
+        <ul id="main-navigation-content">
+          <li id="logo"><a href="#start" title="Springe zurück zum Start"><img src="img/logo.svg" alt="Logo von Lars Dembinsky"/></a></li>
+            <li>
+              <input type="checkbox" id="menu-toggle" class="menu-toggle">
+              <label for="menu-toggle" class="menu-label-off">☰ Menü</label>
+              <label for="menu-toggle" class="menu-label-on">X Menü</label>
+              <ul>
+                <li><a href="#about-me" title="Zum Inhalt springe, um mehr über mich zu erfahren">Über mich</a></li>
+                <li><a href="#experience" title="Mehr über meine Fähigkeiten hier erfahren">Schwerpunkte</a></li>
+                <li><a href="#cv" title="Erfahre hier mehr über mein Leben">Lebenslauf</a></li>
+                <li><a href="#contact" title="Kontakt aufnehmen">Kontakt</a></li>
+              </ul>
+            </li>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <article>
+        <section class="hero">
+          <div class="hero-1">
+            <div class="hero-img">
+              <img src="img/Person.png" alt="Portrait von Lars Dembinsky" tabindex="-1" class="foreground"/>
+              <img src="img/Tisch.png" alt="Tisch mit Arbeitsmaterialien" tabindex="-1" class="midground"/>
+              <div class="background"></div>
+            </div>
+          </div>
+        </section>
+        <section id="about-me" class="global-scroll">
+            <div class="headline-content-wrapper">
+              <div class="headline-content scroll-effect">
+                <span class="headline">Lars Dembinsky</span>
+                <a role="button" class="headline-button" title="Lerne mich kennen" href="#about-me"><span>▼</span></a>
+              </div>
+            </div>
+          <h1 class="scroll-effect">Webdesigner und -Entwickler</h1>
+          <div class="intro global-scroll">
+            <p class="intro-text">
+              Frontend-Entwickler und Webdesigner für <strong>modernes Webdesign, mit starkem Fokus auf Barrierefreiheit und performante Weblösungen, sowie responsive Design.</strong>
+              <br><br>
+              <strong><a href="#ux-ui-design" title="UX/UI Design aufrufen">UX/UI-Design</a></strong>, 
+              <strong><a href="#barrierefreiheit" title="Barrierefreiheit aufrufen">Barrierefreiheit</a></strong>, 
+              <strong><a href="#responsive-design" title="Responsive Design aufrufen">Responsive Design</a></strong>, 
+              <strong><a href="#performante-umsetzung" title="Performante Umsetzung aufrufen">Performante Umsetzung</a></strong> und <strong>weiteres...</strong>
+              <br><br>
+              Zudem beschäftige ich mich viel mit verschiedenen <strong><a href="#ki" title="KI Modelle aufrufen">KI Modellen</a></strong> wie <strong>ChatGPT, Stable Diffusion, Firefly und weitere Modelle</strong> für sinnvolle und professionelle Umsetzung von KI-Inhalten und Überprüfung der Sinnhaftigkeit dieser.
+              <br><br>
+              <i>Weitere Schwerpunkte sind weiter unten im Bereich "<a href="#experience" title="Schwerpunkte">Schwerpunkte</a>" aufgezählt.</i>
+            </p>
+          </div>
+        </section>
+      </article>
+      <article id="experience">
+        <section tabindex="0" id="webdesign" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/web.svg" alt="Icon von einem Monitor"/>
+            <h2 class="img-container-caption">Webdesign</h2>
+            <div class="img-container-subcaption">
+              <span>UX/UI Design, CSS, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Emotionales Webdesign</h3>
+            <p>Als leidenschaftlicher Webdesigner gestalte ich Webseiten, die nicht nur funktionieren, sondern begeistern. Mit fundierter Ausbildung und einem Gespür für aktuelle Trends schaffe ich Designs, die Ihre Botschaft emotional transportieren und Ihre Zielgruppe mitten ins Herz treffen.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="webentwicklung" class="flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/settings.svg" alt="Icon von einem Zahnrad"/>
+            <h2 class="img-container-caption">Webentwicklung</h2>
+            <div class="img-container-subcaption">
+              <span>Performance, Barrierefreiheit, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Moderne Webentwicklung</h3>
+            <p>Als Webentwickler mit einem Auge fürs Detail und technischer Finesse baue ich moderne Webseiten, die sowohl optisch als auch funktional Maßstäbe setzen. Ich vereine aktuelle Trends mit einer benutzerfreundlichen und durchdachten Umsetzung, die Ihre Website zu einem digitalen Erlebnis macht.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="seo" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/search.svg" alt="Icon von einer Lupe"/>
+            <h2 class="img-container-caption">SEO</h2>
+            <div class="img-container-subcaption">
+              <span>Keyword-Research, Sistrix, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Search Engine Optimization</h3>
+            <p>Sichtbarkeit ist der Schlüssel zum Erfolg im Netz. Mit meiner Expertise in SEO und Content-Management-Systemen sorge ich dafür, dass Ihre Website nicht nur gefunden, sondern geliebt wird – von Suchmaschinen und Nutzern gleichermaßen. So holen Sie das Beste aus Ihrer Präsenz heraus.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="cms-systeme" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/server.svg" alt="Icon von einem Server"/>
+            <h2 class="img-container-caption">CMS</h2>
+            <div class="img-container-subcaption">
+              <span>WordPress, Shopify, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Flexibles System</h3>
+            <p>Eine wunderschöne Website ist wertlos, wenn sie niemand sieht. Ich entwickle flexible CMS-Lösungen, die nicht nur optisch begeistern, sondern auch leicht gefunden werden. So erreichen Sie Ihre Kunden dort, wo es wirklich zählt.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="ki" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/memory.svg" alt="Icon von einem Prozessor"/>
+            <h2 class="img-container-caption">KI</h2>
+            <div class="img-container-subcaption">
+              <span>ChatGPT, Firefly, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>KI mit Mehrwert</h3>
+            <p>Künstliche Intelligenz ist der Motor der digitalen Zukunft. Ich helfe Ihnen dabei, diese Technologie gewinnbringend einzusetzen, um Ihr Unternehmen nach vorne zu bringen – mit smarten Lösungen, die Prozesse vereinfachen und neue Potenziale erschließen.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="social-media" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/favorite.svg" alt="Icon von einem Herz"/>
+            <h2 class="img-container-caption">Social Media</h2>
+            <div class="img-container-subcaption">
+              <span>Videoerstellung, Google Ads, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Bleiben Sie im Fokus</h3>
+            <p>Social Media ist Ihr Schaufenster zur Welt. Ich entwickle Inhalte, die perfekt zu Ihrem Markenimage passen und Ihre Botschaft authentisch und professionell präsentieren. So bleiben Sie im Gespräch – und vor allem im Kopf Ihrer Zielgruppe.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="3d-design" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/chair.svg" alt="Icon von einem 3D Stuhl"/>
+            <h2 class="img-container-caption">3D Design</h2>
+            <div class="img-container-subcaption">
+              <span>Blender, Cinema 4D, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Neue Dimensionen schaffen</h3>
+            <p>Ihre Produkte verdienen mehr als nur ein Foto. Mit innovativem 3D-Design mache ich Ihre Produkte erlebbar: realistisch, greifbar, emotional. So wecken Sie Begeisterung und schaffen unvergessliche Eindrücke.</p>
+          </div>
+        </section>
+        <section tabindex="0" id="print-design" class="flex-col-12 flex-col-sm-6">
+          <div class="img-container-3d">
+            <img src="svg/image.svg" alt="Icon von einem Bild"/>
+            <h2 class="img-container-caption">Print Design</h2>
+            <div class="img-container-subcaption">
+              <span>Illustrator, InDesign, ...</span>
+            </div>
+            <div class="img-container-background"></div>
+          </div>
+          <div class="experience-content">
+            <h3>Design zum Erfühlen</h3>
+            <p>Print lebt – und Print begeistert. Ich sorge dafür, dass Ihre Printprodukte nicht nur professionell gestaltet, sondern auch perfekt aufbereitet werden. Damit Ihre Botschaft nicht nur gesehen, sondern auch gefühlt wird.</p>
+          </div>
+        </section>
+      </article>
+      <article id="cv">
+        <section>
+          <h2>Lebenslauf</h2>
+          <p>Um meine Fähigkeiten und Erfahrungen richtig zu repräsentieren, wird hier mein Lebenslauf präsentiert und meine sonstigen Projekte und Erfahrungen.</p>
+          <div>
+            <section class="flex-col-12">
+              <h3>Agentur plantamedium GmbH</h3>
+              <h4>Agentur für Agrar, Ernährung und Tier.</h4>
+              <p>Bei der Agentur plantamedium GmbH konnte ich in einer Vielzahl verschiedener Bereiche des Mediengestalters reinschnuppern.</p>
+              <p><b>Darunter fallen folgende Projekte:</b></p>
+              <ul>
+                <li><strong>Webdesign</strong> <em>Planung und Umsetzung von Kundenwünschen und Optimierungen.</em></li>
+                <li><strong>Webentwicklung</strong> <em>Barrierefreiheit, Semantik, Javascript, etc.</em></li>
+                <li><strong>SEO</strong> <em>Keyword-Mapping, Keyword-Research, etc.</em></li>
+                <li><strong>CMS</strong> <em>WordPress, Shopify.</em></li>
+                <li><strong>KI</strong> <em>Sinnvoller Einsatz von ChatGPT, Firefly, etc.</em></li>
+                <li><strong>Social Media</strong> <em>Erstellung von Social Media Inhalten.</em></li>
+                <li><strong>3D Design</strong> <em>Blender, Cinema 4D.</em></li>
+                <li><strong>Print Design</strong> <em>Erstellung von Druckmedien der verschiedenen Formate.</em></li>
+              </ul>
+            </section>
+            <section class="flex-col-12 flex-col-md-6">
+              <h3>ieQ-Systems Elektro GmbH</h3>
+              <h4>Agentur für Full-Service Digitalisierung von mittelständischen Unternehmen.</h4>
+              <p>In der Agentur ieQ-Systems Elektro GmbH unterstütze ich Elektriker bei ihrer digitalen Präsenz.</p>
+              <p><b>Darunter fallen folgende Projekte:</b></p>
+              <ul>
+                <li><strong>Webdesign</strong> <em>Planung und Umsetzung von Kundenwünschen und Optimierungen.</em></li>
+                <li><strong>Webentwicklung</strong> <em>Barrierefreiheit, Semantik, Javascript, etc.</em></li>
+                <li><strong>SEO</strong> <em>Keyword-Mapping, Keyword-Research, etc.</em></li>
+                <li><strong>CMS</strong> <em>Hauseigenes CMS auf Basis von Bootstrap in Anlehnung an WordPress. Zusätzlich bei der Weiterentwicklung unterstützt.</em></li>
+                <li><strong>KI</strong> <em>Sinnvoller Einsatz von ChatGPT, Firefly, etc.</em></li>
+              </ul>
+            </section>
+            <section class="flex-col-12 flex-col-md-6">
+              <h3>ieQ-Systems MGK <em>(Ausbildung)</em></h3>
+              <h4>Agentur für Full-Service Digitalisierung von mittelständischen Unternehmen.</h4>
+              <p>In der Agentur ieQ-Systems Elektro GmbH unterstütze ich Händler für Möbel, Geräte und Küchen bei ihrer digitalen Präsenz.</p>
+              <p><b>Darunter fallen folgende Projekte:</b></p>
+              <ul>
+                <li><strong>Webdesign</strong> <em>Planung und Umsetzung von Kundenwünschen und Optimierungen.</em></li>
+                <li><strong>Webentwicklung</strong> <em>Barrierefreiheit, Semantik, Javascript, etc.</em></li>
+                <li><strong>SEO</strong> <em>Keyword-Mapping, Keyword-Research, etc.</em></li>
+                <li><strong>CMS</strong> <em>Hauseigenes CMS auf Basis von Bootstrap in Anlehnung an WordPress. Zusätzlich bei der Weiterentwicklung unterstützt.</em></li>
+                <li><strong>KI</strong> <em>Sinnvoller Einsatz von ChatGPT, Firefly, etc.</em></li>
+              </ul>
+            </section>
+            <section class="flex-col-12">
+              <h3>Schulische Ausbildung</h3>
+              <h4>Adolph-Kolping-Berufskolleg</h4>
+              <p>Vor meiner Ausbildung habe ich erfolgreich einen Schulabschluss mit Fachhochschulreife im Bereich Medien gemacht.</p>
+              <p><b>Dort hatte ich folgende Schwerpunkte:</b></p>
+              <ul>
+                <li><strong>3D Druck</strong> <em>Materialauswahl, sowie die Aufbereitung von 3D-Druckfähigen Modellen.</em></li>
+                <li><strong>Logo-Entwicklung</strong> <em>Entwicklung von Logos anhand verschiedener Briefings.</em></li>
+                <li><strong>Produktdesign</strong> <em>Erstellung der Druckvorstufe und Beachtung von Parametern.</em></li>
+                <li><strong>Webdesign</strong> <em>Webdesign mit HTML, CSS, JavaScript.</em></li>
+                <li><strong>Video- und Audioschnitt</strong> <em>Planung und Umsetzung von Videoprojekten, Bildausschnitte, Kameraführung, Mikrofontechnik.</em></li>
+                <li><strong>Fotografie</strong> <em>Blenden, ISO-Wert, Belichtungszeit. Fotografieren von verschiedenen Motiven.</em></li>
+                <li><strong>Drucktechnik</strong> <em>Herausforderungen der Drucktechnik kennen und Medien sinnvoll umsetzen.</em></li>
+              </ul>
+            </section>
+          </div>
+        </section>
+      </article>
+      <article id="contact">
+        <span class="h2 contact">
+          Kontaktiere mich einfach unter:<br>
+          <a href="mailto:larsdembinsky@gmail.com" title="E-Mail Adresse">larsdembinsky@gmail.com</a>
+        </span>
+      </article>
+    </main>
+    <footer>
+      <section>
+        <ul>
+          <li><a href="#" title="Zurück zum Start">Zurück zum Start</a></li>
+          <li><a href="impressum.html" title="Impressum">Impressum</a></li>
+          <li><a href="barrierefreiheit.html" title="Barrierefreiheit">Barrierefreiheit</a></li>
+          <li><a href="datenschutz.html" title="Datenschutz">Datenschutz</a></li>
+          <li><a href="https://www.instagram.com/design_lars/" title="Instagram">Instagram</a></li>
+        </ul>
+      </section>
+    </footer>
+    <script src="js/main.js"></script>
+  </body>
 </html>
