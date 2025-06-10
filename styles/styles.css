@@ -1777,46 +1777,46 @@ body.no-js header nav#main-navigation ul#main-navigation-content li:not(#logo) a
 
 @keyframes glowing {
   0%, 100% {
-    left: 67%;
-    top: 15%;
-    opacity: 0.3;
+    left: 39%;
+    top: 59%;
+    opacity: 0.4;
   }
   25% {
-    left: 96%;
-    top: 44%;
+    left: 48%;
+    top: 17%;
     opacity: 0.2;
   }
   50% {
-    left: 30%;
-    top: 73%;
-    opacity: 0.2;
+    left: 59%;
+    top: 16%;
+    opacity: 0.4;
   }
   75% {
-    left: 94%;
-    top: 38%;
-    opacity: 0.3;
+    left: 54%;
+    top: 29%;
+    opacity: 0.4;
   }
 }
 @keyframes glowing-alt {
   0%, 100% {
-    left: 54%;
-    top: 8%;
-    opacity: 0.3;
+    left: 59%;
+    top: 80%;
+    opacity: 0.2;
   }
   25% {
-    left: 45%;
-    top: 24%;
-    opacity: 0.3;
-  }
-  50% {
-    left: 72%;
-    top: 94%;
+    left: 83%;
+    top: 13%;
     opacity: 0.4;
   }
-  75% {
-    left: 70%;
-    top: 54%;
+  50% {
+    left: 96%;
+    top: 44%;
     opacity: 0.3;
+  }
+  75% {
+    left: 31%;
+    top: 74%;
+    opacity: 0.4;
   }
 }
 #anim-toggle-modal {
