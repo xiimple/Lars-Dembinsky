@@ -774,6 +774,8 @@ body #anim-stop {
   cursor: pointer;
   padding: 0.2rem;
   border: none;
+  width: -moz-min-content;
+  width: min-content;
   background-color: #1f2045;
 }
 @media screen and (min-width: 992px) {
@@ -1775,46 +1777,46 @@ body.no-js header nav#main-navigation ul#main-navigation-content li:not(#logo) a
 
 @keyframes glowing {
   0%, 100% {
-    left: 44%;
-    top: 60%;
-    opacity: 0.2;
+    left: 67%;
+    top: 15%;
+    opacity: 0.3;
   }
   25% {
-    left: 93%;
-    top: 25%;
-    opacity: 0.4;
+    left: 96%;
+    top: 44%;
+    opacity: 0.2;
   }
   50% {
-    left: 55%;
-    top: 13%;
-    opacity: 0.4;
+    left: 30%;
+    top: 73%;
+    opacity: 0.2;
   }
   75% {
-    left: 58%;
-    top: 82%;
+    left: 94%;
+    top: 38%;
     opacity: 0.3;
   }
 }
 @keyframes glowing-alt {
   0%, 100% {
-    left: 30%;
-    top: 100%;
-    opacity: 0.2;
+    left: 54%;
+    top: 8%;
+    opacity: 0.3;
   }
   25% {
-    left: 95%;
-    top: 64%;
+    left: 45%;
+    top: 24%;
     opacity: 0.3;
   }
   50% {
-    left: 83%;
-    top: 67%;
-    opacity: 0.2;
+    left: 72%;
+    top: 94%;
+    opacity: 0.4;
   }
   75% {
-    left: 36%;
-    top: 24%;
-    opacity: 0.4;
+    left: 70%;
+    top: 54%;
+    opacity: 0.3;
   }
 }
 #anim-toggle-modal {
